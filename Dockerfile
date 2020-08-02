@@ -1,2 +1,2 @@
-FROM tomcat:latest
+FROM jenkins
 MAINTAINER teja
