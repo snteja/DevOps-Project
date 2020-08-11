@@ -8,6 +8,3 @@
        file:
         path: /home/ubuntu/devops-world
         state: directory
-        mode: 0755
-        owner: ubuntu
-        group: ubuntu
