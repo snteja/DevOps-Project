@@ -1,6 +1,7 @@
 ---
 - name: firewalld
   hosts: localhost
+  become: yes
   tasks:
   - name: Install firewalld
     apt:
