@@ -1,5 +1,5 @@
 ---
-   - hosts: 18.188.118.245
+   - hosts: webservers
      #remote_user: root
      #sudo: yes
      become: yes
