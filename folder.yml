@@ -2,8 +2,12 @@
    - hosts: localhost
      #remote_user: root
      #sudo: yes
+     become: yes
      tasks:
-     - name: Create Folder
+     - name: Folder creation
        file:
-        name: /home/ubuntu/devops-world
+        name: /home/ubuntu/devopsWorld
         state: directory
+        mode: 0755
+        owner: ubuntu
+        group: ubuntu
