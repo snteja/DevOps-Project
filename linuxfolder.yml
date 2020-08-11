@@ -6,7 +6,7 @@
      tasks:
      - name: Create Folder
        file:
-        path: /home/ubuntu/devops-world
+        path: /home/ubuntu/teja
         state: directory
         mode: 0755
         owner: ubuntu
