@@ -1,0 +1,10 @@
+---
+- name: firewalld
+  hosts: localhost
+  tasks:
+  - name: Install firewalld
+    apt:
+     name: firewalld
+     state: present
+     update_cache: yes
+...
