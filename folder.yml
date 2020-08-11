@@ -1,5 +1,5 @@
 ---
-   - hosts: localhost
+   - hosts: 18.188.118.245
      #remote_user: root
      #sudo: yes
      become: yes
