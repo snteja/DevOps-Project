@@ -25,7 +25,7 @@ pipeline
         {
             steps
             {
-				sh label: '', script: 'cd target && sudo cp DevOpsRocks.war /root/apache-tomcat-8.0.27/webapps/DevOpsRocks.war'
+		sh label: '', script: 'cd target && sudo cp DevOpsRocks.war /root/apache-tomcat-8.0.27/webapps/DevOpsRocks.war'
             }
         }
     }
