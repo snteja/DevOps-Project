@@ -1,19 +1,32 @@
 #!groovy
 
-pipeline {
-  agent none
-  stages {
-    stage('Download') {
-      steps {
-        git 'https://github.com/snteja/DevOps-Project.git'
-      }
-}
-     stage('Docker Run') {
-      agent any
-      steps {
-        sh 'docker run -dit -p 8082:80 centos'
-      }
-     
+pipeline
+{
+    agent any
+    stages
+    {
+        stage ('Download')
+        {
+            steps
+            {
+                git 'https://github.com/snteja/DevOps-Project.git'
+            }
+        }
+        
+        stage ('Build')
+        {
+            steps
+            {
+                sh label: '', script: 'mvn package'
+            }
+        }
+        
+        stage ('Deploy')
+        {
+            steps
+            {
+				sh label: '', script: 'cd target && sudo cp DevOpsRocks.war /root/apache-tomcat-8.0.27/webapps/DevOpsRocks.war'
+            }
+        }
     }
-  }
 }
