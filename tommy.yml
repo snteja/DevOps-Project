@@ -6,7 +6,7 @@
     apt: package=openjdk-8-jdk state=latest
 
   - name: Download Tomcat
-    get_url: url=https://archive.apache.org/dist/tomcat/tomcat-8/v8.0.27/bin/apache-tomcat-8.0.27.tar.gz dest=/home/ubuntu
+    get_url: url=https://archive.apache.org/dist/tomcat/tomcat-8/v8.0.27/bin/apache-tomcat-8.0.27.tar.gz dest=/home/ubuntu become=yes
 
   - name: Extract archive
     unarchive: src=/home/ubuntu/apache-tomcat-8.0.27.tar.gz dest=/home/ubuntu remote_src=yes
