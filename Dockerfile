@@ -1,2 +1,2 @@
-FROM tomcat:latest
+FROM ubuntu:latest
 MAINTAINER teja
