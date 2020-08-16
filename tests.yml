@@ -1,5 +1,5 @@
 ---
-- hosts: 18.191.84.45
+- hosts: webservers
   name:  Project Deployment
   tasks:
   - name: installing java
