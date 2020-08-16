@@ -1,2 +1,2 @@
-FROM jenkins
+FROM nginx
 MAINTAINER teja
