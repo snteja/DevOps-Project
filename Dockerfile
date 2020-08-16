@@ -1,2 +1,2 @@
-FROM nginx
+FROM tomcat:latest
 MAINTAINER teja
