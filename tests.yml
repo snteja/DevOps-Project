@@ -1,5 +1,5 @@
 ---
-- hosts: webservers
+- hosts: localhost
   name:  Project Deployment
   tasks:
   - name: installing java
