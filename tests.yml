@@ -1,7 +1,6 @@
 ---
 - hosts: tomcatserver
-  remote_user: root
-  become: yes
+  
   name:  Project Deployment
   tasks:
   - name: installing java
