@@ -1,5 +1,5 @@
 ---
-- hosts: 18.225.33.164
+- hosts: tomcatserver
   name:  Project Deployment
   tasks:
   - name: installing java
