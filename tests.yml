@@ -1,5 +1,5 @@
 ---
-- hosts: localhost
+- hosts: /var/lib/jenkins/workspace/Ansible/hosts
   name:  Project Deployment
   tasks:
   - name: installing java
