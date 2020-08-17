@@ -1,7 +1,6 @@
 ---
-- hosts: 18.225.33.164
+- hosts: localhost
   name:  Project Deployment
-  become: yes
   tasks:
   - name: installing java
     apt: package=openjdk-8-jdk state=latest
