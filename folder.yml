@@ -6,7 +6,7 @@
      tasks:
      - name: Folder creation
        file:
-        name: /home/ubuntu/Linuxworld
+        name: /home/ubuntu/devworld
         state: directory
         mode: 0755
         owner: ubuntu
