@@ -1,12 +1,12 @@
 ---
-   - hosts: localhost
+   - hosts: node-servers
      #remote_user: root
      #sudo: yes
      become: yes
      tasks:
      - name: Folder creation
        file:
-        name: /home/ubuntu/Linux
+        name: /home/ubuntu/Linuxworld
         state: directory
         mode: 0755
         owner: ubuntu
