@@ -1,5 +1,6 @@
 ---
 - hosts: node-servers
+  remote_user: root
   become: true
   name:  Project Deployment
   tasks:
