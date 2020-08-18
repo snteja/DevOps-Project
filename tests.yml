@@ -1,5 +1,5 @@
 ---
-- hosts: tomcatserver
+- hosts: node-servers
   become: true
   name:  Project Deployment
   tasks:
