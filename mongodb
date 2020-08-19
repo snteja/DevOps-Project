@@ -1,0 +1,9 @@
+---
+- name: mongo installation
+  hosts: node-servers
+  tasks: 
+   - name: Install mongodb
+     apt:
+      name: mongodb
+      state: present
+...
