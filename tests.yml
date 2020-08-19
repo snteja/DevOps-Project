@@ -1,5 +1,5 @@
 ---
-- hosts: 3.21.114.222
+- hosts: webserver1
   
   
   name:  Project Deployment
