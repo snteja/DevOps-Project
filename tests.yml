@@ -1,5 +1,5 @@
 ---
-- hosts: node-servers
+- hosts: 3.21.114.222
   
   
   name:  Project Deployment
