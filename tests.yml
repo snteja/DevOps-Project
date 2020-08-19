@@ -1,6 +1,6 @@
 ---
 - hosts: 3.21.114.222
-  become: yes
+  
   
   name:  Project Deployment
   tasks:
