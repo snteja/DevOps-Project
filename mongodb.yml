@@ -1,6 +1,7 @@
 ---
 - name: mongo installation
   hosts: node-servers
+  become: yes
   tasks: 
    - name: Install mongodb
      apt:
