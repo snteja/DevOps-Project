@@ -1,0 +1,10 @@
+---
+- name: Tree package
+  hosts: localhost
+  tasks:
+  - name: Tree uninstall
+    apt:
+     name: tree
+     state: absent
+     update_cache: yes
+...
