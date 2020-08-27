@@ -13,5 +13,12 @@ pipeline
                 git url: 'https://github.com/snteja/DevOps-Project.git', branch: "${params.branch}"
             }
         }
+        stage ('Build the war file')
+        {
+            steps
+            {
+                sh label: '', script: 'mvn package'
+            }
+        }
     }
 }
