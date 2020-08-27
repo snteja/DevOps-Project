@@ -1,4 +1,4 @@
-properties([parameters([choice(choices: ['mastar', 'taja', 'praveen', 'quint'], description: '', name: 'branch')])])
+properties([parameters([choice(choices: ['master', 'teja', 'QA', 'Prod'], description: '', name: 'branch')])])
 
 pipeline
 {
