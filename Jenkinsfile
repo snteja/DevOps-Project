@@ -1,19 +1,17 @@
-pipeline {	
-	agent {
-		docker {
-			image 'ubuntu:latest'
-		}
-	}
-    stages {	
-        stage('Build') {	
-            steps {	
-                sh 'cat /etc/lsb-release'
-            }	
-        }	
-        stage('Deploy') {	
-            steps {	
-                sh 'cat /etc/lsb-release'
-            }	
-        }			
-    }	
+properties([parameters([choice(choices: ['mastar', 'taja', 'praveen', 'quint'], description: '', name: 'branch')])])
+
+pipeline
+{
+    agent any
+    stages
+    {
+        stage ('checkout')
+        {
+            steps
+            {
+                echo "Pull code from branch teja ${params.branch}"
+                git url: 'https://github.com/snteja/DevOps-Project.git', branch: "${params.branch}"
+            }
+        }
+    }
 }
