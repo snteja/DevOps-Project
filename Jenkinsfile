@@ -1,4 +1,4 @@
-#Using Docker containers per stage
+#!Using Docker containers per stage
 pipeline {	
 	agent {
 		docker {
