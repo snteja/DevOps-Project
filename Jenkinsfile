@@ -1,4 +1,4 @@
-#!One container per stage
+#!One docker container per stage
 pipeline {	
 	agent {
 		docker {
