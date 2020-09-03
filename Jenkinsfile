@@ -2,7 +2,7 @@
 pipeline {	
 	agent {
 		docker {
-			image 'ubuntu:latest'
+			image 'ubuntu:18.04'
 		}
 	}
     stages {	
