@@ -1,3 +1,4 @@
+#! groovy script
 properties([parameters([choice(choices: ['master', 'teja', 'Prod', 'QA'], description: '', name: 'branch')])])
 
 pipeline
