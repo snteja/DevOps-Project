@@ -1,0 +1,9 @@
+---
+- name: Tree playbook
+  hosts: localhost
+  tasks:
+   - name: Install tree
+     apt:
+      name: tree
+      state: present
+      update_cache: no
