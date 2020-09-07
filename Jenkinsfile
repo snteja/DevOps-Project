@@ -1,5 +1,5 @@
 #! PULL, PUSH & RUN
-
+#! Docker build
 pipeline {
   agent any
   stages {
@@ -14,7 +14,6 @@ pipeline {
             }
         }
        stage('Docker Run') {
-           agent any
            steps {
                 sh 'docker run -d -it --name testubuntu sainava225/testubuntu'
      }
