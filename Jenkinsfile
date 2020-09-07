@@ -1,20 +1,13 @@
-#! groovy script
-pipeline {	
-	agent {
-		docker {
-			image 'ubuntu:latest'
-		}
-	}
-    stages {	
-        stage('Build') {	
-            steps {	
-                sh 'cat /etc/lsb-release'
-            }	
-        }	
-        stage('Deploy') {	
-            steps {	
-                sh 'cat /etc/lsb-release'
-            }	
-        }			
-    }	
+pipeline {
+   agent any
+   parameters { 
+               choice(choices: 'develop\nrelease\nmaster', description: 'select the branch name ' , name: 'Branch_Name')
+        }
+     stages {
+       stage ('Checkout') {
+           steps {
+              checkout scm
+             }
+            }
+             }   
 }
