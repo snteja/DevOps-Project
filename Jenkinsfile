@@ -1,5 +1,4 @@
 #! PULL, PUSH & RUN
-Another way --> https://www.liatrio.com/blog/building-with-docker-using-jenkins-pipelines
 
 pipeline {
   agent any
