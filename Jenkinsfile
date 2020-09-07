@@ -1,13 +1,30 @@
 pipeline {
-   agent any
-   parameters { 
-               choice(choices: 'develop\nrelease\nmaster', description: 'select the branch name ' , name: 'Branch_Name')
-        }
-     stages {
-       stage ('Checkout') {
-           steps {
-              checkout scm
-             }
+  agent any
+  stages {
+    stage('Cloning Git') {
+      steps {
+        git 'https://github.com/snteja/DevOps-Project.git'
+      }
+    }
+     stage('Docker Build') {
+            steps {
+                sh label: '', script: 'docker build -t sainava225/testubuntu .'
             }
-             }   
-}
+        }
+       stage('Docker Run') {
+           agent any
+           steps {
+                sh 'docker run -d -it --name testubuntu sainava225/testubuntu'
+     }
+   }
+       stage ('Docker Push')
+	   {
+	    steps{
+		withCredentials([string(credentialsId: 'dockerhub-teja', variable: 'dockerhubpwd')]) {
+    sh "docker login -u sainava225 -p ${dockerhubpwd}"
+    }
+	sh label: '', script: 'docker push sainava225/testubuntu'
+    }
+        }
+    }
+  }
