@@ -9,7 +9,6 @@ pipeline {
             }
         }
        stage('Docker Run') {
-           agent any
            steps {
                 sh 'docker run -d -it --name runubuntu ubuntu'
      }
