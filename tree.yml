@@ -1,10 +1,10 @@
 ---
 - name: Tree package
-  hosts: localhost
+  hosts: webserver1
   tasks:
-  - name: Tree uninstall
+  - name: Tree install
     apt:
      name: tree
-     state: absent
+     state: present
      update_cache: no
 ...
