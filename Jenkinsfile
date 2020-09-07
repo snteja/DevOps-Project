@@ -1,5 +1,5 @@
-#! PULL, PUSH & RUN
-#! Docker build
+#! Build, PUSH & RUN
+
 pipeline {
   agent any
   stages {
