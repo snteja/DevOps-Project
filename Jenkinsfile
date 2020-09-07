@@ -1,3 +1,4 @@
+#!groovy script
 pipeline {	
 	agent {
 		docker {
