@@ -1,4 +1,4 @@
-#!groovy script
+#!groovy script added line
 pipeline {	
 	agent {
 		docker {
