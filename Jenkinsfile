@@ -1,3 +1,4 @@
+#! ubuntu test
 pipeline {	
 	agent {
 		docker {
