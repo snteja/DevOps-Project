@@ -1,6 +1,6 @@
 FROM sainava225/tomcat-java8
 MAINTAINER TEJA
-COPY DevOpsRocks.war /usr/local/tomcat/webapps/DevOpsRocks.war
+COPY target/*.war /usr/local/tomcat/webapps/
 EXPOSE 8080
 WORKDIR /usr/local/tomcat/bin
 CMD catalina.sh run
