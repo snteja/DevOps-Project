@@ -21,11 +21,11 @@ pipeline
             }
         }
 		
-		stage ('Move Dockerfile')
+		stage ('Build Dockerfile')
         {
             steps
             {
-				sh 'sudo docker build -t devopsrocks .' 
+		sh 'sudo docker build -t devopsrocks .' 
             }
         }
 		
@@ -33,7 +33,7 @@ pipeline
         {
             steps
             {
-				withCredentials([string(credentialsId: 'dockerhub-teja', variable: 'dockerhubpwd')]) {
+		withCredentials([string(credentialsId: 'dockerhub-teja', variable: 'dockerhubpwd')]) {
 					sh "docker login -u sainava225 -p ${dockerhubpwd}"
 			}
 				sh 'sudo docker tag devopsrocks sainava225/project-app'
