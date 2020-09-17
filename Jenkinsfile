@@ -42,7 +42,7 @@ pipeline
         }
 	    stage('Docker Run') {
            steps {
-                sh 'docker run -dit --name my-app sainava225/project-app' + ":$BUILD_NUMBER"
+                sh 'docker run -dit --name my-app -p 9090:8080 sainava225/project-app' + ":$BUILD_NUMBER"
      }
    }
     }
