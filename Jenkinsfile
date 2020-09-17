@@ -29,16 +29,21 @@ pipeline
             }
         }
 		
-		stage ('Docker Tag and Push')
+		stage ('Docker Push')
         {
             steps
             {
 		withCredentials([string(credentialsId: 'dockerhub-teja', variable: 'dockerhubpwd')]) {
-					sh "docker login -u sainava225 -p ${dockerhubpwd}"
+		sh "docker login -u sainava225 -p ${dockerhubpwd}"
 			}
-				sh 'sudo docker tag devopsrocks sainava225/project-app:v1'
-				sh 'sudo docker push sainava225/project-app:v1'
+		sh 'sudo docker tag devopsrocks sainava225/project-app' + ":$BUILD_NUMBER"
+		sh 'sudo docker push sainava225/project-app' + ":$BUILD_NUMBER"
 			}	
-        }	
+        }
+	    stage('Docker Run') {
+           steps {
+                sh 'docker run -dit --name my-app sainava225/project-app' + ":$BUILD_NUMBER"
+     }
+   }
     }
 }
