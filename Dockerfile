@@ -1,4 +1,6 @@
-FROM ubuntu:latest
-MAINTAINER teja
-RUN apt-get update
-RUN apt-get install maven -y
+FROM sainava225/tomcat-java8
+MAINTAINER TEJA
+COPY DevOpsRocks.war /usr/local/tomcat/webapps/DevOpsRocks.war
+EXPOSE 8080
+WORKDIR /usr/local/tomcat/bin
+CMD catalina.sh run
