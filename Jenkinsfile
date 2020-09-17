@@ -36,8 +36,8 @@ pipeline
 		withCredentials([string(credentialsId: 'dockerhub-teja', variable: 'dockerhubpwd')]) {
 					sh "docker login -u sainava225 -p ${dockerhubpwd}"
 			}
-				sh 'sudo docker tag devopsrocks sainava225/project-app'
-				sh 'sudo docker push sainava225/project-app'
+				sh 'sudo docker tag devopsrocks sainava225/project-app:v1'
+				sh 'sudo docker push sainava225/project-app:v1'
 			}	
         }	
     }
