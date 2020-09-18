@@ -45,5 +45,15 @@ pipeline
                 sh 'docker run -dit --name my-app -p 9090:8080 sainava225/project-app' + ":$BUILD_NUMBER"
      }
    }
+	    stage ('Email notifications')
+        {
+            steps
+            {
+                mail bcc: '', body: '''Project pipeline build status
+
+		FROM
+		Devops team''', cc: 'steja678@gmail.com', from: '', replyTo: '', subject: 'Build status', to: 'sainavateja1@gmail.com'
+            }
+        }
     }
 }
