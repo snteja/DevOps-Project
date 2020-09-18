@@ -20,39 +20,11 @@ pipeline
                 sh label: '', script: 'mvn package'
             }
         }
-		
-		stage ('Build Dockerfile')
+	    stage ('Deployment to S3 bucket')
         {
             steps
             {
-		sh 'sudo docker build -t devopsrocks .' 
-            }
-        }
-		
-		stage ('Docker Push')
-        {
-            steps
-            {
-		withCredentials([string(credentialsId: 'dockerhub-teja', variable: 'dockerhubpwd')]) {
-		sh "docker login -u sainava225 -p ${dockerhubpwd}"
-			}
-		sh 'sudo docker tag devopsrocks sainava225/project-app' + ":$BUILD_NUMBER"
-		sh 'sudo docker push sainava225/project-app' + ":$BUILD_NUMBER"
-			}	
-        }
-	    stage('Docker Run') {
-           steps {
-                sh 'docker run -dit --name my-app -p 9090:8080 sainava225/project-app' + ":$BUILD_NUMBER"
-     }
-   }
-	    stage ('Email notifications')
-        {
-            steps
-            {
-                mail bcc: '', body: '''Project pipeline build status
-
-		FROM
-		Devops team''', cc: 'steja678@gmail.com', from: '', replyTo: '', subject: 'Build status', to: 'sainavateja1@gmail.com'
+                s3Upload consoleLogLevel: 'INFO', dontSetBuildResultOnFailure: false, dontWaitForConcurrentBuildCompletion: false, entries: [[bucket: 'sainava225-s3', excludedFile: '', flatten: false, gzipFiles: false, keepForever: false, managedArtifacts: false, noUploadOnFailure: false, selectedRegion: 'us-east-2', showDirectlyInBrowser: false, sourceFile: '*.war', storageClass: 'STANDARD', uploadFromSlave: false, useServerSideEncryption: false]], pluginFailureResultConstraint: 'FAILURE', profileName: 'sainavateja-s3', userMetadata: []
             }
         }
     }
