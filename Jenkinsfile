@@ -24,7 +24,9 @@ pipeline
         {
             steps
             {
-                s3Upload consoleLogLevel: 'INFO', dontSetBuildResultOnFailure: false, dontWaitForConcurrentBuildCompletion: false, entries: [[bucket: 'sainava225-s3', excludedFile: '', flatten: false, gzipFiles: false, keepForever: false, managedArtifacts: false, noUploadOnFailure: false, selectedRegion: 'us-east-2', showDirectlyInBrowser: false, sourceFile: '**', storageClass: 'STANDARD', uploadFromSlave: false, useServerSideEncryption: false]], pluginFailureResultConstraint: 'FAILURE', profileName: 'sainavateja-s3', userMetadata: []
+                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'Deploy-s3-bucket', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+		sh  "aws s3 cp /var/lib/jenkins/workspace/dockerpipeline-app/target/* s3://sainava225-s3"
+		}
             }
         }
     }
