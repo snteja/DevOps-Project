@@ -29,5 +29,30 @@ pipeline
 		}
             }
         }
+	    
+	    stage ('Build Dockerfile')
+        {
+            steps
+            {
+		sh 'sudo docker build -t tech-data .' 
+            }
+        }
+		
+		stage ('Docker Push')
+        {
+            steps
+            {
+		withCredentials([string(credentialsId: 'dockerhub-teja', variable: 'dockerhubpwd')]) {
+		sh "docker login -u sainava225 -p ${dockerhubpwd}"
+			}
+		sh 'sudo docker tag tech-data sainava225/tech-datarocks' + ":$BUILD_NUMBER"
+		sh 'sudo docker push sainava225/tech-datarocks' + ":$BUILD_NUMBER"
+			}	
+        }
+	    stage('Docker Run') {
+           steps {
+                sh 'docker run -dit --name my-app -p 9090:8080 sainava225/tech-datarocks' + ":$BUILD_NUMBER"
+     }
+   }
     }
 }
