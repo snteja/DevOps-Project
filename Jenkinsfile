@@ -24,8 +24,8 @@ pipeline
         {
             steps
             {
-                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'Deploy-s3-bucket', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-		sh  "aws s3 cp /var/lib/jenkins/workspace/Project/target/*.war s3://sainava225-s3"
+                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 's3-bucket', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+		sh  "aws s3 cp /var/lib/jenkins/workspace/Project/target/*.war s3://sainava-s3"
 		}
             }
         }
