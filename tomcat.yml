@@ -15,7 +15,7 @@
     copy: src=/var/lib/jenkins/workspace/Ansible_pipeline/target/DevOpsRocks.war dest=/home/ubuntu/
   
   - name: copying the war file to tomcat server
-    shell: cp /home/ubuntu/DevOpsRocks-3.0.war /home/ubuntu/apache-tomcat-8.0.27/webapps/DevOpsRocks-3.0.war remote_src=yes
+    shell: cp /home/ubuntu/DevOpsRocks-3.0.war /home/ubuntu/apache-tomcat-8.0.27/webapps/DevOpsRocks-3.0.war
 
   - name: start apache-tomcat-8.0.27
     shell: /home/ubuntu/apache-tomcat-8.0.27/bin/startup.sh
