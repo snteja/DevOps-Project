@@ -12,7 +12,7 @@
     unarchive: src=/home/ubuntu/apache-tomcat-8.0.27.tar.gz dest=/home/ubuntu remote_src=yes
 
   - name: copy DevOpsRocks-3.0.war
-    copy: src=/var/lib/jenkins/workspace/Ansible_pipeline/target/DevOpsRocks.war dest=/home/ubuntu/ remote_src=yes
+    copy: src=/var/lib/jenkins/workspace/Ansible_pipeline/target/DevOpsRocks.war dest=/home/ubuntu/ remote_src=true
   
   - name: copying the war file to tomcat server
     shell: cp /home/ubuntu/DevOpsRocks-3.0.war /home/ubuntu/apache-tomcat-8.0.27/webapps/
