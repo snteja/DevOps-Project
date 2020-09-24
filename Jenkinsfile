@@ -26,7 +26,8 @@ pipeline
     {
         failure
         {
-            mail bcc: '', body: "Please go to ${env.BUILD_URL} for more details.", cc: '', from: '', replyTo: '', subject: "Job ${env.JOB_NAME}- (${env.BUILD_NUMBER}) has FAILED", to: 'sainavateja1@gmail.com'
+            mail bcc: '', body: "Please go to ${env.BUILD_URL} for more details.", cc: '', from: '', replyTo: '', subject: "Job ${env.JOB_NAME} - (${env.BUILD_NUMBER}) has FAILED", to: 'sainavateja1@gmail.com'
+            emailext attachLog: true
         }
     }
 }
