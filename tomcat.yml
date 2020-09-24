@@ -1,5 +1,5 @@
 ---
-- hosts: webserver2
+- hosts: all
   
   tasks:
   - name: installing java 
