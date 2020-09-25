@@ -25,7 +25,7 @@ pipeline
         {
             steps
             {
-		sh 'sudo docker build -t project .' 
+		sh 'docker build -t project .' 
             }
         }
 		
@@ -36,8 +36,8 @@ pipeline
 		withCredentials([string(credentialsId: 'dockerhub-teja', variable: 'dockerhubpwd')]) {
 		sh "docker login -u sainava225 -p ${dockerhubpwd}"
 			}
-		sh 'sudo docker tag project sainava225/praveenproject-app' + ":$BUILD_NUMBER"
-		sh 'sudo docker push sainava225/praveenproject-app' + ":$BUILD_NUMBER"
+		sh 'docker tag project sainava225/praveenproject-app' + ":$BUILD_NUMBER"
+		sh 'docker push sainava225/praveenproject-app' + ":$BUILD_NUMBER"
 			}	
         }
         
