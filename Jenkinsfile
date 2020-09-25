@@ -41,6 +41,22 @@ pipeline
 			}	
         }
         
-        
+        stage ('Deploy to K8s')
+        {
+            steps
+            {
+                sshagent(['k8-ssh']) {
+                    sh 'scp -o StrictHostKeyChecking=no project-service.yml pod-teja.yml snteja@192.168.0.103:/home/snteja/'
+		    script{
+			try{
+				sh 'ssh snteja@192.168.0.103 kubectl apply -f .'
+				}catch(error){
+				sh 'ssh snteja@192.168.0.103 kubectl create -f .'
+				}
+		    }
+		}
+            }
+            }
+        }
     }
 }
