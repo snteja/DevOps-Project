@@ -9,4 +9,4 @@ spec:
     - name: project-container
       image: sainava225/praveenproject-app
       ports:
-        - containerPort: 80
+        - containerPort: 8080
