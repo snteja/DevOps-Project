@@ -1,2 +1,2 @@
-webserver1 ansible_host=18.218.56.135 ansible_port=22
+webserver1 ansible_host=18.220.92.40 ansible_port=22
 webserver2 ansible_host=13.59.254.151 ansible_port=22
