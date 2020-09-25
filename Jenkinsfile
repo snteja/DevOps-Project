@@ -41,14 +41,6 @@ pipeline
 			}	
         }
         
-        #stage ('Deploy to K8s')
-        {
-            steps
-            {
-                sshagent(['k8-ssh']) {
-                    // some block
-            }
-            }
-        }
+        
     }
 }
