@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: project-pod
+  labels:
+    app: project
+spec:
+  containers:
+    - name: project-container
+      image: sainava225/praveenproject-app
+      ports:
+        - containerPort: 80
