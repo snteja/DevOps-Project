@@ -4,9 +4,9 @@ metadata:
   name: praveen-project
 spec:
  type: NodePort
-  selector:
+ selector:
     app: project
-  ports:
+ ports:
     - protocol: TCP
       port: 8080
       targetPort: 8080
