@@ -1,6 +1,6 @@
 ---
 - name: Tree package
-  hosts: webserver1
+  hosts: all
   tasks:
   - name: Tree install
     apt:
