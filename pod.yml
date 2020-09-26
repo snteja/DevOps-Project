@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: project-pod
+  name: teja-pod
   labels:
     app: project
 spec:
   containers:
-    - name: project-container
+    - name: teja-container
       image: sainava225/teja-app:tagVersion
       ports:
         - containerPort: 8080
