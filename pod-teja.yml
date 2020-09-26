@@ -7,6 +7,6 @@ metadata:
 spec:
   containers:
     - name: project-container
-      image: sainava225/praveenproject-app
+      image: sainava225/devops-app
       ports:
         - containerPort: 8080
