@@ -7,6 +7,6 @@ metadata:
 spec:
   containers:
     - name: project-container
-      image: sainava225/devops-app
+      image: sainava225/teja-app:tagVersion
       ports:
         - containerPort: 8080
