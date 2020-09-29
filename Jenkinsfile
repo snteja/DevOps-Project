@@ -17,7 +17,7 @@ pipeline
         {
             steps
             {
-                sh label: '', script: 'mvn package'
+                sh 'mvn package'
             }
         }
         
