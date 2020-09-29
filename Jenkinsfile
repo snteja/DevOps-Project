@@ -20,43 +20,17 @@ pipeline
                 sh label: '', script: 'mvn package'
             }
         }
-		
-		stage ('Build Dockerfile')
-        {
-            steps
-            {
-		sh 'docker build -t project .' 
-            }
-        }
-		
-		stage ('Docker Push')
-        {
-            steps
-            {
-		withCredentials([string(credentialsId: 'dockerhub-teja', variable: 'dockerhubpwd')]) {
-		sh "docker login -u sainava225 -p ${dockerhubpwd}"
-			}
-		sh 'docker tag project sainava225/praveenproject-app' + ":$BUILD_NUMBER"
-		sh 'docker push sainava225/praveenproject-app' + ":$BUILD_NUMBER"
-			}	
-        }
         
-        stage ('Deploy to K8s')
+    }
+    post
+    {
+        failure
         {
-            steps
-            {
-                sshagent(['k8-ssh']) {
-                    sh 'scp -o StrictHostKeyChecking=no project-service.yml pod-teja.yml snteja@192.168.0.103:/home/snteja/'
-		    script{
-			try{
-				sh 'ssh snteja@192.168.0.103 kubectl apply -f .'
-				}catch(error){
-				sh 'ssh snteja@192.168.0.103 kubectl create -f .'
-				}
-		    }
-		}
-            }
-            }
+            emailext attachLog: true, body: "Please go to ${env.BUILD_URL} for more details.", subject: "Job ${env.JOB_NAME} - (${env.BUILD_NUMBER}) has FAILED", to: 'sainavateja1@gmail.com'
+        }
+        success
+        {
+            emailext attachLog: true, body: "Please go to ${env.BUILD_URL} for more details.", subject: "Job ${env.JOB_NAME} - (${env.BUILD_NUMBER}) has SUCCEDED", to: 'sainavateja1@gmail.com'
         }
     }
 }
