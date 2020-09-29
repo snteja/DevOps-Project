@@ -15,18 +15,9 @@ pipeline {
                 sh label: '', script: 'mvn package'
             }
         }
-        stage('Ansible init') {
-           steps {
-             script {
-               def tfHome = tool name: 'myansible'
-                env.PATH = "${tfHome}:${env.PATH}"
-                 sh 'ansible --version'
-             }
-          }
-        }
         stage('Ansible') {
            steps {
-                ansiblePlaybook become: true, credentialsId: 'ansible-node-ssh2', disableHostKeyChecking: true, installation: 'myansible', inventory: 'hosts', playbook: 'tomcat.yml'
+                ansiblePlaybook become: true, credentialsId: 'ansible-ssh', disableHostKeyChecking: true, installation: 'myansible', inventory: 'hosts', playbook: 'tomcat.yml'
           }
         }
     }
