@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: webserver1
   
   tasks:
   - name: installing java 
@@ -11,7 +11,7 @@
   - name: Extract archive
     unarchive: src=/home/ubuntu/apache-tomcat-8.0.27.tar.gz dest=/home/ubuntu remote_src=yes
 
-  - name: copy DevOpsRocks-3.0.war
+  - name: copy DevOpsRocks.war
     copy: src=/var/lib/jenkins/workspace/Ansible_pipeline/target/DevOpsRocks.war dest=/home/ubuntu/
   
   - name: copying the war file to tomcat server
