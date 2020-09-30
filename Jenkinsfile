@@ -15,10 +15,14 @@ pipeline {
                 sh label: '', script: 'mvn package'
             }
         }
-        stage('Ansible') {
-           steps {
-                ansiblePlaybook become: true, credentialsId: 'ansible-ssh', disableHostKeyChecking: true, installation: 'myansible', inventory: 'hosts', playbook: 'tomcat.yml'
-          }
+        
+        stage ('Sonar tests')
+        {
+            steps
+            {
+                withSonarQubeEnv(credentialsId: 'sonarqube') {
+                    sh 'mvn sonar:sonar' }
+            }
         }
     }
 }
