@@ -1,0 +1,29 @@
+pipeline
+{
+    agent any
+    stages
+    {
+        stage('Checkout')
+        {
+            steps
+            {
+                git 'https://github.com/snteja/DevOps-Project.git'
+            }
+        }
+        stage('Build')
+        {
+            steps
+            {
+                sh 'mvn package'
+            }
+        }
+        
+        stage('Nexus Artifactory')
+        {
+            steps
+            {
+			    nexusArtifactUploader artifacts: [[artifactId: 'DevOpsRocks', classifier: '', file: 'target/DevOpsRocks.war', type: 'war']], credentialsId: 'nex-cred', groupId: 'project.in', nexusUrl: '18.189.3.229:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'devdata/', version: '1.0'
+            }
+        }
+    }
+}
