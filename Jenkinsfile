@@ -40,7 +40,7 @@ pipeline
 		sh "docker login -u sainava225 -p ${dockerhubpwd}"
 			}
 		echo "sainava225/snteja-app:${DOCKER_TAG}"
-		sh "docker push sainava225/teja-app:${DOCKER_TAG}"
+		sh "docker push sainava225/snteja-app:${DOCKER_TAG}"
 			}	
         }
         
