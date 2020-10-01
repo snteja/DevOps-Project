@@ -24,22 +24,22 @@ pipeline
             }
         }
 		
-		stage ('Build Dockerfile')
+	stage ('Build Dockerfile')
         {
             steps
             {
-		sh "docker build . -t sainava225/teja-app:${DOCKER_TAG}"
+		sh "docker build . -t sainava225/snteja-app:${DOCKER_TAG}"
             }
         }
 		
-		stage ('Docker Push')
+	stage ('Docker Push')
         {
             steps
             {
 		withCredentials([string(credentialsId: 'dockerhub-teja', variable: 'dockerhubpwd')]) {
 		sh "docker login -u sainava225 -p ${dockerhubpwd}"
 			}
-		echo "sainava225/teja-app:${DOCKER_TAG}"
+		echo "sainava225/snteja-app:${DOCKER_TAG}"
 		sh "docker push sainava225/teja-app:${DOCKER_TAG}"
 			}	
         }
@@ -51,12 +51,12 @@ pipeline
                 sh 'chmod +x  changeTag.sh'
 				sh "./changeTag.sh ${DOCKER_TAG}"
 				sshagent(['k8-ssh']) {
-                    sh 'scp -o StrictHostKeyChecking=no teja-service.yml teja-pod.yml ubuntu@18.219.116.85:/home/ubuntu/'
+                    sh 'scp -o StrictHostKeyChecking=no teja-service.yml teja-pod.yml ubuntu@18.221.94.79:/home/ubuntu/'
 		    script{
 			try{
-				sh 'ssh ubuntu@18.219.116.85 kubectl apply -f .'
+				sh 'ssh ubuntu@18.221.94.79 kubectl apply -f .'
 				}catch(error){
-				sh 'ssh ubuntu@18.219.116.85 kubectl create -f .'
+				sh 'ssh ubuntu@18.221.94.79 kubectl create -f .'
 				}
 		    }
 		}
