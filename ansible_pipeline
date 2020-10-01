@@ -1,0 +1,33 @@
+pipeline {
+    agent any
+     
+    stages {
+      stage('checkout') {
+           steps {
+             
+                git branch: 'master', url: 'https://github.com/snteja/DevOps-Project.git'
+          }
+        }
+        stage ('Build')
+        {
+            steps
+            {
+                sh label: '', script: 'mvn package'
+            }
+        }
+        stage('Ansible init') {
+           steps {
+             script {
+               def tfHome = tool name: 'myansible'
+                env.PATH = "${tfHome}:${env.PATH}"
+                 sh 'ansible --version'
+             }
+          }
+        }
+        stage('Ansible') {
+           steps {
+                ansiblePlaybook become: true, credentialsId: 'ansible-ubuntu', disableHostKeyChecking: true, installation: 'myansible', inventory: 'hosts', playbook: 'tomcat.yml'
+          }
+        }
+    }
+}
