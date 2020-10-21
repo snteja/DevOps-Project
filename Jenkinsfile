@@ -43,9 +43,9 @@ pipeline
             steps
             {
                 script{
-                def dockerRun = sh "docker run -d -p 8090:8080 --name myserver201 sainava225/my-image:$BUILD_NUMBER"
-                    sshagent(['dockerserver-cred']) {
-                    sh "ssh -o StrictHostKeyChecking=no teja@18.222.93.117 ${dockerRun}"
+                def dockerRun = sh "sudo docker run -d -p 8090:8080 --name myserver201 sainava225/my-image:$BUILD_NUMBER"
+                    sshagent(['docker-cred']) {
+                    sh "ssh -o StrictHostKeyChecking=no ubuntu@3.14.6.238 ${dockerRun}"
                     }
                 }
             }
