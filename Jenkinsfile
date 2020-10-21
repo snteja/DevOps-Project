@@ -23,7 +23,7 @@ pipeline
         {
             steps
             {
-                sh "docker build -t sainava225/my-image:$BUILD_NUMBER ."
+                sh "docker build -t sainava225/images:$BUILD_NUMBER ."
             }
         }
         
@@ -34,7 +34,7 @@ pipeline
                 withCredentials([string(credentialsId: 'dockerhubcred', variable: 'dockerhubpwd')]) {
                  sh "docker login -u sainava225 -p ${dockerhubpwd}"
                     }
-                sh "docker push sainava225/my-image:$BUILD_NUMBER"
+                sh "docker push sainava225/images:$BUILD_NUMBER"
             }
         }
         
@@ -43,7 +43,7 @@ pipeline
             steps
             {
                 sshagent(['docker-server']) {
-                    sh "ssh -o StrictHostKeyChecking=no teja@3.137.138.194 docker run -d -p 8080:8080 --name myserver sainava225/my-image:$BUILD_NUMBER"
+                    sh "ssh -o StrictHostKeyChecking=no teja@172.31.43.160 docker run -d -p 8080:8080 --name myserver sainava225/images:$BUILD_NUMBER"
                 }
             }
         }
