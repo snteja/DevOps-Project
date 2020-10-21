@@ -1,14 +1,9 @@
-#!groovy
-
 pipeline
 {
     agent any
-	environment{
-	DOCKER_TAG = getDockerTag()
-	}
     stages
     {
-        stage ('Download')
+        stage('Checkout')
         {
             steps
             {
@@ -16,57 +11,44 @@ pipeline
             }
         }
         
-        stage ('Build')
+        stage('Build')
         {
             steps
             {
-                sh 'mvn package'
+                sh 'mvn clean package'
             }
-        }
-		
-	stage ('Build Dockerfile')
-        {
-            steps
-            {
-		sh "docker build . -t sainava225/snteja-app:${DOCKER_TAG}"
-            }
-        }
-		
-	stage ('Docker Push')
-        {
-            steps
-            {
-		withCredentials([string(credentialsId: 'dockerhub-teja', variable: 'dockerhubpwd')]) {
-		sh "docker login -u sainava225 -p ${dockerhubpwd}"
-			}
-		echo "sainava225/snteja-app:${DOCKER_TAG}"
-		sh "docker push sainava225/snteja-app:${DOCKER_TAG}"
-			}	
         }
         
-        stage ('Deploy to K8s')
+        stage('Create Docker Image')
         {
             steps
             {
-                sh 'chmod +x  changeTag.sh'
-				sh "./changeTag.sh ${DOCKER_TAG}"
-				sshagent(['k8-ssh']) {
-                    sh 'scp -o StrictHostKeyChecking=no teja-service.yml teja-pod.yml ubuntu@18.221.94.79:/home/ubuntu/'
-		    script{
-			try{
-				sh 'ssh ubuntu@18.221.94.79 kubectl apply -f .'
-				}catch(error){
-				sh 'ssh ubuntu@18.221.94.79 kubectl create -f .'
-				}
-		    }
-		}
+                sh "docker build -t sainava225/my-image:$BUILD_NUMBER ."
             }
+        }
+        
+        stage('Push Docker Image')
+        {
+            steps
+            {
+                withCredentials([string(credentialsId: 'dockerhub-teja', variable: 'dockerhubpasswd')]) {
+                 sh "docker login -u sainava225 -p ${dockerhubpasswd}"
+                    }
+                sh "docker push sainava225/my-image:$BUILD_NUMBER"
+            }
+        }
+        
+        stage('Run on Docker server')
+        {
+            steps
+            {
+                script{
+                def dockerRun = sh "docker run -d -p 8090:8080 --name myserver201 sainava225/my-image:$BUILD_NUMBER"
+                    sshagent(['dockerserver-cred']) {
+                    sh "ssh -o StrictHostKeyChecking=no teja@18.222.93.117 ${dockerRun}"
+                    }
+                }
             }
         }
     }
-
-
-def getDockerTag(){
-    def tag = sh script: 'git rev-parse HEAD', returnStdout: true
-	return tag
 }
