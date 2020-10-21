@@ -44,6 +44,7 @@ pipeline
             {
                 sshagent(['docker-server']) {
                     sh "ssh -o StrictHostKeyChecking=no ubuntu@172.31.19.156 docker run -d -p 8090:8080 --name myserver201 sainava225/my-image:$BUILD_NUMBER"
+                }
             }
         }
     }
