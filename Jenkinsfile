@@ -43,7 +43,7 @@ pipeline
             steps
             {
                 sshagent(['docker-server']) {
-                    sh "ssh -o StrictHostKeyChecking=no teja@172.31.43.160 docker run -d -p 8080:8080 --name myserver sainava225/images:$BUILD_NUMBER"
+                    sh "ssh -o StrictHostKeyChecking=no teja@172.31.43.160 sudo docker run -d -p 8080:8080 --name myserver sainava225/images:$BUILD_NUMBER"
                 }
             }
         }
