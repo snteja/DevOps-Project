@@ -31,8 +31,8 @@ pipeline
         {
             steps
             {
-                withCredentials([string(credentialsId: 'dockerhub', variable: 'dockerhubpwd')]) {
-                 sh "docker login -u sainava225 -p ${dockerhubpwd}"
+                withCredentials([string(credentialsId: 'dockerhub-teja', variable: 'dockerhubpasswd')]) {
+                 sh "docker login -u sainava225 -p ${dockerhubpasswd}"
                     }
                 sh "docker push sainava225/my-image:$BUILD_NUMBER"
             }
@@ -43,11 +43,12 @@ pipeline
             steps
             {
                 script{
-					docker.withServer('tcp://3.14.6.238:2375') {
-					docker.image('sainava225/my-image:$BUILD_NUMBER').withRun('-p 8090:8080 --name myserver201')
+                def dockerRun = sh "docker run -d -p 8090:8080 --name myserver201 sainava225/my-image:$BUILD_NUMBER"
+                    sshagent(['dockerserver-cred']) {
+                    sh "ssh -o StrictHostKeyChecking=no teja@18.222.93.117 ${dockerRun}"
+                    }
                 }
             }
         }
-	}
     }
 }
