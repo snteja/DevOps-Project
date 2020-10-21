@@ -31,8 +31,8 @@ pipeline
         {
             steps
             {
-                withCredentials([string(credentialsId: 'dockerhub-teja', variable: 'dockerhubpasswd')]) {
-                 sh "docker login -u sainava225 -p ${dockerhubpasswd}"
+                withCredentials([string(credentialsId: 'dockerhub', variable: 'dockerhubpwd')]) {
+                 sh "docker login -u sainava225 -p ${dockerhubpwd}"
                     }
                 sh "docker push sainava225/my-image:$BUILD_NUMBER"
             }
