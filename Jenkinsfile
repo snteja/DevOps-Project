@@ -42,9 +42,7 @@ pipeline
         {
             steps
             {
-                sshagent(['docker-server']) {
-                    sh "ssh ubuntu@172.31.43.160 sudo docker run -d -p 8080:8080 --name myserver sainava225/images:$BUILD_NUMBER"
-                }
+                    sh "ssh snteja@138.68.30.85 sudo docker run -d -p 8080:8080 --name myserver sainava225/images:$BUILD_NUMBER"
             }
         }
     }
