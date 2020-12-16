@@ -3,7 +3,7 @@ pipeline
     agent any
     stages
     {
-        stage('Checkout')
+        stage ('Checkout')
         {
             steps
             {
@@ -11,39 +11,24 @@ pipeline
             }
         }
         
-        stage('Build')
+        stage ('Build')
         {
             steps
             {
-                sh 'mvn clean package'
-            }
-        }
-        
-        stage('Create Docker Image')
-        {
-            steps
-            {
-                sh "docker build -t sainava225/images:$BUILD_NUMBER ."
-            }
-        }
-        
-        stage('Push Docker Image')
-        {
-            steps
-            {
-                withCredentials([string(credentialsId: 'dockerhubcred', variable: 'dockerhubpwd')]) {
-                 sh "docker login -u sainava225 -p ${dockerhubpwd}"
-                    }
-                sh "docker push sainava225/images:$BUILD_NUMBER"
-            }
-        }
-        
-        stage('Run on Docker server')
-        {
-            steps
-            {
-                    sh "ssh snteja@138.68.30.85 docker run -d -p 8080:8080 --name myserver sainava225/images:$BUILD_NUMBER"
+                sh 'mvn package'
             }
         }
     }
+    
+    post
+        {
+            success
+            {
+                slackSend channel: '#jenkins_builds', color: 'good', message: "Build status: ${env.JOB_NAME} ${env.BUILD_NUMBER} is success. Please go to ${env.BUILD_URL} for more details.", teamDomain: 'devops-n4o9126', tokenCredentialId: 'slack_token'
+            }
+            failure
+            {
+                slackSend channel: '#jenkins_builds', color: 'red', message: "Build status: ${env.JOB_NAME} ${env.BUILD_NUMBER} has failed. Please go to ${env.BUILD_URL} for more details.", teamDomain: 'devops-n4o9126', tokenCredentialId: 'slack_token'
+            }
+        }
 }
