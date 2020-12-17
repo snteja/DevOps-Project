@@ -1,5 +1,5 @@
 #!groovy
-properties([parameters([gitParameter(branch: '', branchFilter: '.*', defaultValue: '', description: 'Select one branch to build', name: 'Branch', quickFilterEnabled: false, selectedValue: 'NONE', sortMode: 'NONE', tagFilter: '*', type: 'PT_BRANCH')])])
+properties([parameters([string(defaultValue: 'origin/master', description: 'Select any branch', name: 'BRANCH', trim: false)])])
 
 pipeline
 {
