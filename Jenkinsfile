@@ -1,5 +1,5 @@
 #!groovy
-properties([parameters([string(defaultValue: 'master', description: 'Select any branch', name: 'BRANCH', trim: false)])])
+properties([parameters([listGitBranches(branchFilter: '.*', credentialsId: '', defaultValue: '', name: 'FROM_Branch', quickFilterEnabled: false, remoteURL: 'https://github.com/snteja/DevOps-Project.git', selectedValue: 'NONE', sortMode: 'NONE', tagFilter: '*', type: 'PT_BRANCH')])])
 
 pipeline
 {
