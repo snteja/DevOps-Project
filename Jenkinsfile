@@ -1,5 +1,5 @@
 #!groovy
-properties([parameters([string(defaultValue: 'origin/master', description: 'Select any branch', name: 'BRANCH', trim: false)])])
+properties([parameters([string(defaultValue: 'master', description: 'Select any branch', name: 'BRANCH', trim: false)])])
 
 pipeline
 {
