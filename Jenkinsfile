@@ -1,4 +1,4 @@
-properties([parameters([choice(choices: ['master\nteja\nProd\nQA\nTEST'], description: 'Select any branch to build', name: 'BRANCHES')])])
+properties([parameters([gitParameter(branch: '', branchFilter: '.*', defaultValue: 'master', description: 'Select one branch to build', name: 'Branch', quickFilterEnabled: false, selectedValue: 'NONE', sortMode: 'NONE', tagFilter: '*', type: 'PT_BRANCH')])])
 
 pipeline
 {
